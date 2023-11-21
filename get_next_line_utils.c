@@ -6,31 +6,29 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:41:52 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/19 11:05:33 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/21 21:28:33 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(char *s, int c)
+int	ft_lookfor_newline(char *s)
 {
 	int		i;
-	int		len;
 
 	i = 0;
-	len = ft_strlen(s);
-	while (i <= len)
+	while (s[i])
 	{
-		if (s[i] == (char)c)
-			return (&s[i]);
+		if (s[i] == '\n')
+			return (1);
 		i++;
 	}
 	return (0);
 }
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])

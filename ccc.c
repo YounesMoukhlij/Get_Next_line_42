@@ -6,19 +6,19 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:29:02 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/20 15:14:51 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:25:40 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void    ft_free(char str, char buff)
+void    ft_free(char *str, char *buff)
 {
     free (str);
     free (buff);
 }
 
-static    char    ft_read(int fd, char str)
+static    char    ft_read(int fd, char *str)
 {   
     char    *buff;
     int        br;
@@ -47,7 +47,7 @@ static    char    ft_read(int fd, char str)
     return (str);
 }
 
-static char    ft_get_line(char str)
+static char    ft_get_line(char *str)
 {
     int        len;
     int        i;
@@ -79,8 +79,7 @@ static char    ft_get_line(char str)
 char    *get_next_line(int fd)
 {
     static char    *string;
-    char        *line;  
-    
+    char        *line;
     char        *s;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
