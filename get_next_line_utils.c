@@ -6,7 +6,7 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:41:52 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/21 21:28:33 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:52:18 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,42 @@ int	ft_lookfor_newline(char *s)
 {
 	int		i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == '\n')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
-int	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 		i++;
 	return (i);
 }
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup(char *s)
 {
-	int		len;
 	int		i;
 	char	*r;
 
 	i = 0;
-	len = ft_strlen(s1);
-	r = malloc(sizeof(char) * (len + 1));
+	r = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!r)
-		return (0);
-	while (s1[i])
+		return (NULL);
+	while (s[i])
 	{
-		r[i] = s1[i];
+		r[i] = s[i];
 		i++;
 	}
 	r[i] = '\0';
@@ -58,17 +60,23 @@ char	*ft_strdup(char *s1)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*str;
+	char	*r;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	r = malloc(sizeof(char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
+	if (!r)
 		return (NULL);
-	while (*s1)
-		*str++ = *s1++;
-	while (*s2)
-		*str++ = *s2++;
-	*str = '\0';
-	return (str);
+	while (s1[j])
+		r[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		r[i++] = s2[j++];
+	r[i] = '\0';
+	free(s1);
+	return (r);
 }
