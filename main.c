@@ -6,24 +6,35 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:08:11 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/23 18:56:27 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:36:01 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-/*
-void leaks(void)
-{
-	system("leaks a.out");
-}
-*/
+
+// void leaks(void)
+// {
+// 	system("leaks a.out");
+// }
+
 
 int	main(void)
 {
-	int	fd;
+	int		fd;
+	char	*s;
 
 	fd = open("text.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
+	s = get_next_line(fd);
+
+	printf("%s", s);
+
+	s = get_next_line(fd);
+	printf("%s", s);
+	s = get_next_line(fd);
+
+	printf("%s", s);
+
+	free(s);
 
 	//atexit(leaks);
 }
