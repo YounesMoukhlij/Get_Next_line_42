@@ -6,11 +6,14 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:08:11 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/25 15:15:02 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:34:51 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+//#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+#include <stdio.h>
+# include <fcntl.h>
 
 // void leaks(void)
 // {
@@ -22,18 +25,24 @@
 int	main(void)
 {
 	int		fd;
-	char	*s;
+	int		fd1;
+	char	*s = "";
+	char	*d = "";
 
 	fd = open("text.txt", O_RDONLY);
-	s = get_next_line(fd);
+	
+	fd1 = open("dra.txt", O_RDONLY);
 
-	printf("%s", s);
 
-	s = get_next_line(fd);
-	printf("%s", s);
-	s = get_next_line(fd);
+	while (s)
+	{
+		s = get_next_line(fd);
+		printf("%s", s);
+	}
+	while (d)
+	{
+		d = get_next_line(fd1);
+		printf("%s", d);
+	}
 
-	printf("%s", s);
-
-	free(s);
 }
