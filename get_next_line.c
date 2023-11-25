@@ -6,13 +6,13 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:56:15 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/24 18:32:44 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/25 14:19:46 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_the_rest_helper(char *rest_of, char *str, int i)
+static char	*get_the_rest_helper(char *rest_of, char *str, int i)
 {
 	int	j;
 
@@ -28,7 +28,7 @@ char	*get_the_rest_helper(char *rest_of, char *str, int i)
 	return (rest_of);
 }
 
-char	*ft_get_the_rest(char *str)
+static char	*ft_get_the_rest(char *str)
 {
 	int		i;
 	char	*rest_of;
@@ -36,19 +36,18 @@ char	*ft_get_the_rest(char *str)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (str[i] == '\0')
+	if (!str[i])
 	{
 		free (str);
 		return (NULL);
 	}
 	rest_of = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
 	if (!rest_of)
-		return (NULL);
-	i++;
-	return (get_the_rest_helper(rest_of, str, i));
+		return (free(str),str = NULL, NULL);
+	return (get_the_rest_helper(rest_of, str, i + 1));
 }
 
-char	*ft_get_the_line(char *s)
+static char	*ft_get_the_line(char *s)
 {
 	char	*new_str;
 	int		i;
@@ -62,6 +61,7 @@ char	*ft_get_the_line(char *s)
 	new_str = malloc(i + 1);
 	if (!new_str)
 		return (NULL);
+		//return (free(s), s = NULL, NULL);
 	j = 0;
 	while (j < i)
 	{
@@ -72,7 +72,7 @@ char	*ft_get_the_line(char *s)
 	return (new_str);
 }
 
-char	*ft_read_from_fd(char *str, int fd)
+static char	*ft_read_from_fd(char *str, int fd)
 {
 	char	*my_buffer;
 	int		i;
@@ -82,13 +82,10 @@ char	*ft_read_from_fd(char *str, int fd)
 	{
 		my_buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!my_buffer)
-			return (NULL);
+			return (free(str) , str = NULL, NULL);
 		i = read(fd, my_buffer, BUFFER_SIZE);
 		if (i < 0)
-		{
-			free(my_buffer);
-			return (NULL);
-		}
+			return (free(str), free(my_buffer), NULL);
 		if (i == 0)
 		{
 			free(my_buffer);
@@ -96,6 +93,8 @@ char	*ft_read_from_fd(char *str, int fd)
 		}
 		my_buffer[i] = '\0';
 		str = ft_strjoin(str, my_buffer);
+		if (!str)
+			return (free(my_buffer), NULL);
 		free(my_buffer);
 	}
 	if (!ft_strlen(str))
@@ -116,20 +115,18 @@ char	*get_next_line(int fd)
 	if (!str)
 	{
 		str = malloc(1);
-		str[0] = '\0';
 		if (!str)
 		{
-			free (str);
-			return (NULL);
+			return (free(str) ,NULL);
 		}
+		str[0] = '\0';
 	}
 	str = ft_read_from_fd(str, fd);
 	if (!str)
-	{
-		free (str);
-		return (NULL);
-	}
+		return (free(str), str = NULL, NULL);
 	get_line = ft_get_the_line(str);
+	if (!get_line)
+		return (free(str), str = NULL, NULL);
 	str = ft_get_the_rest(str);
 	return (get_line);
 }

@@ -6,7 +6,7 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:29:24 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/24 18:08:19 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:51:23 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <limits.h>
 # include <stdio.h>
 # include <string.h>
-
 
 char	*get_next_line(int fd);
 char	*ft_strdup(char *s);
