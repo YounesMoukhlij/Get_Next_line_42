@@ -1,1 +1,0 @@
--Wall -Wextra -Werror -fsanitize=address -g -D BUFFER_SIZE=100 main.c get_next_line.c get_next_line_utils.c

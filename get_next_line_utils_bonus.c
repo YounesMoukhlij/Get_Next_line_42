@@ -6,7 +6,7 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 18:02:56 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/25 18:03:04 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:26:56 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,38 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*r;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	r = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!r)
+		return (free(s1), s1 = NULL, NULL);
+	while (s1[j])
+		r[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		r[i++] = s2[j++];
+	r[i] = '\0';
+	free (s1);
+	return (r);
+}
+
 char	*ft_strdup(char *s)
 {
-	int		i;
 	char	*r;
+	int		i;
 
 	i = 0;
 	if (!s)
 		return (NULL);
-	r = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	r = malloc(ft_strlen(s) + 1);
 	if (!r)
 		return (NULL);
 	while (s[i])
@@ -55,47 +78,5 @@ char	*ft_strdup(char *s)
 		i++;
 	}
 	r[i] = '\0';
-	if (!r)
-	{
-		free (r);
-		return (NULL);
-	}
 	return (r);
-}
-
-char	*ft_join_the_strings(char *r, char *s, char *d)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s[j])
-	{
-		r[i] = s[j];
-		j++;
-		i++;
-	}
-	j = 0;
-	while (d[j])
-	{
-		r[i] = d[j];
-		j++;
-		i++;
-	}
-	r[i] = '\0';
-	free (s);
-	return (r);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*r;
-
-	if (!s1 || !s2)
-		return (NULL);
-	r = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!r)
-		return (free(s1), s1 = NULL, NULL);
-	return (ft_join_the_strings(r, s1, s2));
 }

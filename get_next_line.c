@@ -6,34 +6,20 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:56:15 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/25 17:46:53 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:48:41 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*get_the_rest_helper(char *rest_of, char *str, int i)
-{
-	int	j;
-
-	j = 0;
-	while (str[i])
-	{
-		rest_of[j] = str[i];
-		i++;
-		j++;
-	}
-	rest_of[j] = '\0';
-	free(str);
-	return (rest_of);
-}
-
 static char	*ft_get_the_rest(char *str)
 {
 	int		i;
+	int		j;
 	char	*rest_of;
 
 	i = 0;
+	j = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (!str[i])
@@ -41,10 +27,13 @@ static char	*ft_get_the_rest(char *str)
 		free (str);
 		return (NULL);
 	}
-	rest_of = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
+	rest_of = malloc(ft_strlen(str) - (i - 1));
 	if (!rest_of)
 		return (free(str), str = NULL, NULL);
-	return (get_the_rest_helper(rest_of, str, i + 1));
+	i++;
+	while (str[i])
+		rest_of[j++] = str[i++];
+	return (rest_of[j] = '\0', free(str), rest_of);
 }
 
 static char	*ft_get_the_line(char *s)

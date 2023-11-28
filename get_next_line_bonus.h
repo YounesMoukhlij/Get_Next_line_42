@@ -6,7 +6,7 @@
 /*   By: youmoukh <youmoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:25:58 by youmoukh          #+#    #+#             */
-/*   Updated: 2023/11/25 18:27:28 by youmoukh         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:25:33 by youmoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strdup(char *s);
 int		ft_lookfor_newline(char *s);
 size_t	ft_strlen(char *s);
+char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 
 #endif
