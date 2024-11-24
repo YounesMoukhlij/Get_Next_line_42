@@ -65,17 +65,4 @@ This implementation of `get_next_line` aims to read a file line by line, a commo
 
 ---
 
-### **Suggestions**
-
-- **Add Tests for Edge Cases:**
-  - Empty files, files without newline characters, and large files exceeding `BUFFER_SIZE`.
-
-- **Optimize Buffer Management:**
-  - Use a fixed-size buffer and reduce frequent allocations.
-
-- **Document Assumptions:**
-  - Clarify how functions like `ft_strlen` and `ft_strjoin` are expected to behave.
-
----
-
 Let me know if you want an explanation of any specific part of the code or improvements for a particular aspect!
